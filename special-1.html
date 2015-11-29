@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	html,body{
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+	}
+	#im:hover{
+		cursor: pointer;
+	}
+	#im{
+		width: 350px;
+		height: 200px;
+		position: absolute;
+		left: 0px;
+		top: 500px;
+		background: url(ab.gif);
+		background-size: 100% 100%;
+	}
+	#foo{
+		width: 100%;
+		height: 51%;
+		position: absolute;
+		left: 0px;
+		top: 100%;
+		background:rgb(20,20,50);
+		line-height: 400px;
+		text-align: center;
+		color: white;
+		font-size: 100px;
+		font-weight: bold;
+	}
+	#char{
+		width: 300px;
+		height: 100px;
+		position: absolute;
+		font-size: 30px;
+		color: blue;
+		text-align: center;
+		line-height: 100px;
+	}
+	</style>
+</head>
+<body>
+	<div id="topa">
+		
+	</div>
+	<div id="im">
+		
+	</div>
+	<div id="foo">
+		ÕâÉÏÃæÐ´µÄÊÇÎÄ×Ö
+	</div>
+	<div id="char">
+		点击图片
+	</div>
+<script>
+	var im=document.getElementById("im");
+	var foo=document.getElementById("foo");
+	var r=180;
+ 	var	a=90;
+	var b=30;
+	var speed=32;
+	im.onclick=function(){
+		console.log(1);
+		s1=setInterval(function(){
+			im.style.borderRadius="50%";
+			if(im.offsetWidth>=200){
+				im.style.width=im.offsetWidth-12+"px";
+				im.style.left=im.offsetLeft+6+"px";
+			}
+			if(im.offsetWidth<=200 && im.offsetWidth>=100){
+				im.style.width=im.offsetWidth-12+"px";
+				im.style.height=im.offsetHeight-12+"px";
+				im.style.left=im.offsetLeft+6+"px";
+				im.style.top=im.offsetTop+6+"px";
+			}
+			if(im.offsetWidth<=100){
+				im.style.left=im.offsetLeft+30+"px";
+			}
+			if(im.offsetLeft>=document.body.clientWidth/2-50){
+				i_top=im.offsetTop;
+				i_left=im.offsetLeft;
+				clearInterval(s1);
+				abs();
+			}
+		},1000/60);
+	}
+	function abs(){
+		s2=setInterval(function(){
+				a-=5;
+				de=a*Math.PI/180;
+				x=r*Math.cos(de)-25;
+				y=r*Math.sin(de);
+				im.style.left=i_left+x+"px";
+				im.style.top=i_top-r+y+"px";
+				if(a<=-90){
+					clearInterval(s2);
+					add();
+				}
+		},1000/60);
+	}
+	add=function(){
+		s3=setInterval(function(){
+			b-=0.6;
+			if(im.offsetWidth<=document.body.clientWidth){
+				im.style.width=im.offsetWidth+40+"px";
+				im.style.left=im.offsetLeft-20+"px";
+			}
+			if(im.offsetHeight<=document.body.clientHeight/2){
+				im.style.height=im.offsetHeight+16+"px";
+				im.style.top=im.offsetTop-8+"px";
+			}
+			im.style.borderRadius=b+"%";
+			if(b<=0){
+				clearInterval(s3);
+				ass();
+			}
+		},1000/60);
+	}
+
+	function ass(){
+		s4=setInterval(function(){
+			speed-=1;
+			foo.style.top=foo.offsetTop-speed+"px";
+			if(foo.offsetTop<=document.body.clientHeight/2){
+				clearInterval(s4);
+				im.onclick=null;
+			}
+		},1000/60);
+	}
+
+</script>
+</body>
+</html>
